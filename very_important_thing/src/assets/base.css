@@ -97,3 +97,25 @@ a {
   margin: 0;
   color: var(--muted);
 }
+
+.fade-in-title {
+  opacity: 0;
+  animation: fadeIn 1.6s ease forwards;
+}
+
+.fade-in-body {
+  opacity: 0;
+  animation: fadeIn 2.2s ease forwards;
+  animation-delay: 0.5s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

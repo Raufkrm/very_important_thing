@@ -10,6 +10,7 @@ export const useAccessStore = defineStore('access', {
     allowedNames: [],
     isAllowed: false,
     checked: false,
+    maxStep: Number(sessionStorage.getItem('maxStep') || 0),
   }),
   actions: {
     async loadAllowedNames() {
@@ -31,12 +32,24 @@ export const useAccessStore = defineStore('access', {
       const normalizedInput = normalize(name)
       this.isAllowed = this.allowedNames.map(normalize).includes(normalizedInput)
       this.checked = true
+      if (this.isAllowed && this.maxStep < 1) {
+        this.maxStep = 1
+        sessionStorage.setItem('maxStep', String(this.maxStep))
+      }
       return this.isAllowed
+    },
+    setStep(step) {
+      if (step > this.maxStep) {
+        this.maxStep = step
+        sessionStorage.setItem('maxStep', String(this.maxStep))
+      }
     },
     reset() {
       this.name = ''
       this.isAllowed = false
       this.checked = false
+      this.maxStep = 0
+      sessionStorage.removeItem('maxStep')
     },
   },
 })

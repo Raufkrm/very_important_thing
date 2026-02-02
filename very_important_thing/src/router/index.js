@@ -26,31 +26,31 @@ const router = createRouter({
       path: '/q1',
       name: 'question-1',
       component: Question1View,
-      meta: { requiresAccess: true },
+      meta: { requiresAccess: true, step: 1 },
     },
     {
       path: '/q2',
       name: 'question-2',
       component: Question2View,
-      meta: { requiresAccess: true },
+      meta: { requiresAccess: true, step: 2 },
     },
     {
       path: '/q3',
       name: 'question-3',
       component: Question3View,
-      meta: { requiresAccess: true },
+      meta: { requiresAccess: true, step: 3 },
     },
     {
       path: '/q4',
       name: 'question-4',
       component: Question4View,
-      meta: { requiresAccess: true },
+      meta: { requiresAccess: true, step: 4 },
     },
     {
       path: '/q5',
       name: 'question-5',
       component: Question5View,
-      meta: { requiresAccess: true },
+      meta: { requiresAccess: true, step: 5 },
     },
     {
       path: '/:pathMatch(.*)*',
@@ -68,6 +68,10 @@ router.beforeEach(async (to) => {
 
   if (to.meta.requiresAccess && !accessStore.isAllowed) {
     return { name: 'access-denied' }
+  }
+
+  if (to.meta.step && accessStore.maxStep < to.meta.step) {
+    return { name: 'question-1' }
   }
 
   if (to.name === 'intro' && accessStore.isAllowed) {

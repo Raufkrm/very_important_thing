@@ -4,21 +4,28 @@ import { useAccessStore } from '../stores/access'
 
 const router = useRouter()
 const accessStore = useAccessStore()
+
+const goNext = () => {
+  accessStore.setStep(2)
+  router.push({ name: 'question-2' })
+}
 </script>
 
 <template>
   <main class="question">
     <section class="panel">
-      <p class="eyebrow">Question 1</p>
-      <h1 class="title">The first riddle awaits.</h1>
-      <p class="subtitle">Hello {{ accessStore.name || 'stranger' }}, the puzzle begins soon.</p>
+      <p class="eyebrow fade-in-title">Question 1</p>
+      <h1 class="title fade-in-title">The first riddle awaits.</h1>
+      <p class="subtitle fade-in-body">
+        Hello {{ accessStore.name || 'stranger' }}, the puzzle begins soon.
+      </p>
 
-      <div class="placeholder">
+      <div class="placeholder fade-in-body">
         <p class="muted">Template placeholder. Add your first puzzle here.</p>
       </div>
 
-      <div class="actions">
-        <button class="button" @click="router.push({ name: 'question-2' })">Next</button>
+      <div class="actions fade-in-body">
+        <button class="button" @click="goNext">Next</button>
       </div>
     </section>
   </main>

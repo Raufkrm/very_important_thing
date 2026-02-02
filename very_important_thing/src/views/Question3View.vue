@@ -1,22 +1,29 @@
 <script setup>
 import { useRouter } from 'vue-router'
+import { useAccessStore } from '../stores/access'
 
 const router = useRouter()
+const accessStore = useAccessStore()
+
+const goNext = () => {
+  accessStore.setStep(4)
+  router.push({ name: 'question-4' })
+}
 </script>
 
 <template>
   <main class="question">
     <section class="panel">
-      <p class="eyebrow">Question 3</p>
-      <h1 class="title">Silence holds the answer.</h1>
-      <p class="subtitle">Template placeholder for question three.</p>
+      <p class="eyebrow fade-in-title">Question 3</p>
+      <h1 class="title fade-in-title">Silence holds the answer.</h1>
+      <p class="subtitle fade-in-body">Template placeholder for question three.</p>
 
-      <div class="placeholder">
+      <div class="placeholder fade-in-body">
         <p class="muted">Add your third puzzle here.</p>
       </div>
 
-      <div class="actions">
-        <button class="button" @click="router.push({ name: 'question-4' })">Next</button>
+      <div class="actions fade-in-body">
+        <button class="button" @click="goNext">Next</button>
       </div>
     </section>
   </main>
